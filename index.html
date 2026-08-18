@@ -90,37 +90,6 @@
   }
   .intro p{margin:0 0 16px;}
 
-  /* Part badges */
-  .part-badge{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin:52px 0 24px;
-  }
-  .part-badge .num{
-    font-family:'Noto Serif KR',serif;
-    font-weight:900;
-    font-size:14px;
-    color:#fff;
-    background:var(--navy);
-    width:32px;height:32px;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .part-badge .label{
-    font-family:'Noto Serif KR',serif;
-    font-weight:700;
-    font-size:20px;
-    color:var(--navy);
-  }
-  .part-desc{
-    font-size:14.5px;
-    color:var(--ink-soft);
-    margin:-10px 0 28px;
-    padding-left:44px;
-  }
-
   /* Issue cards (Part 1) */
   .issue{
     background:var(--panel);
@@ -161,14 +130,6 @@
     padding:12px 16px;
     font-size:14.5px;
   }
-
-  .cite{
-    font-size:12.5px;
-    color:#8a8577;
-    margin-top:14px;
-    font-family:'Noto Sans KR',sans-serif;
-  }
-  .cite .pg{color:#a9793b;font-weight:700;}
 
   .stat-row{
     display:flex;
@@ -406,9 +367,17 @@
     border-bottom:2px solid var(--navy-deep);
   }
 
+  /* Small muted note under a table — table caveats, source labels.
+     Declared last among same-specificity "p" rules (.issue p / .a p / .final p)
+     so it always wins the cascade tie regardless of which card it sits in. */
+  p.table-note{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:4px 0 16px;
+  }
+
   @media (max-width:480px){
     header.hero{padding:44px 18px 34px;}
-    .part-desc{padding-left:0;margin-top:6px;}
     .a{padding-left:0;}
     table.compare{font-size:11.5px;}
   }
@@ -526,7 +495,7 @@
 
   <div class="issue highlight">
     <h3>그래서, 얼마나 손해인가 — 지연기간별 예상 손해</h3>
-    <p>이 위험은 추상적이지 않습니다. 분상제·채권입찰제 재도입 등 정책 리스크에 노출될 가능성도 함께 커지는 가운데, 지연기간별 조합원 1인당 예상 손해는 다음과 같이 추정됩니다(산출근거는 별첨).</p>
+    <p>이 위험은 추상적이지 않습니다. 분상제·채권입찰제 재도입 등 정책 리스크에 노출될 가능성도 함께 커지는 가운데, 지연기간별 조합원 1인당 예상 손해는 다음과 같이 추정됩니다.</p>
     <table class="compare">
       <colgroup><col style="width:18%"><col style="width:27%"><col style="width:27%"><col style="width:28%"></colgroup>
       <tr><th>지연기간</th><th>조합사업비<br>(공사비·금융비)</th><th>개인기회비용<br>(월세손실)</th><th>1인당 총 손해액</th></tr>
@@ -536,7 +505,7 @@
       <tr><td class="label">2년</td><td>약 4.1억원</td><td>약 2.3억원</td><td class="damage-total">약 6.4억원</td></tr>
       <tr><td class="label">3년</td><td>약 6.5억원</td><td>약 3.7억원</td><td class="damage-total">약 10.2억원</td></tr>
     </table>
-    <p style="font-size:12px;color:var(--ink-soft);margin:4px 0 14px;">※ 위 수치는 시나리오 추정치이며 확정된 손해액이 아님</p>
+    <p class="table-note">※ 위 수치는 시나리오 추정치이며 확정된 손해액이 아님 [산출근거는 별첨]</p>
     <p>조합이 강조하는 "1인당 평균 2.2억원 감소"는 스스로도 비현실적이라 밝힌 일반분양가 100% 시나리오의 최대값(40~100% 적용 시 4,300만원~2.2억원)일 뿐이며, 위 표에서 보듯 1년만 지연돼도 이미 이 최대값을 넘어서는 손해가 발생합니다. 조합은 이를 얻기 위해 감수해야 할 위법 소지와 지연 손해액은 구체적으로 제시하지 않았습니다.</p>
   </div>
 
@@ -619,7 +588,7 @@
         <tr><td class="label">A 조합원<br>+1 일반가격</td><td>20억+10억<br>=30억</td><td>40억+20억<br>=60억</td><td>20억+20억<br>=40억</td><td class="low">20억<br>종전자산 대비 약 66.7%</td></tr>
         <tr><td class="label">B 조합원</td><td>10억</td><td>20억</td><td>10억</td><td class="high">10억<br>종전자산 대비 100%</td></tr>
       </table>
-      <p style="font-size:12px;color:var(--ink-soft);margin:4px 0 18px;">※ 태평양 자문서의 예시 수치 <span class="pg">[20~21쪽]</span></p>
+      <p class="table-note">※ 태평양 자문서의 예시 수치 <span class="pg">[20~21쪽]</span></p>
       <p>조합측이 말하는 '형평성'은 +1 조합원과 기본 1주택 조합원 사이의 격차를 줄이자는 취지로 보이지만, 위 표에서 보듯 실제 계산 결과는 정반대입니다. A 조합원처럼 종전자산이 큰 조합원일수록 개발이익률이 더 크게 깎이는 반면, B 조합원은 그대로 100%를 유지합니다.</p>
       <p>태평양 자문서는 이렇게 결론짓습니다.<span class="fn-ref">2</span></p>
       <blockquote><p>"다수 조합원이 추가수입을 얻는다는 사실만으로 이러한 차별이 정당화되지는 않습니다. 관리처분계획은 단순히 조합원 1인당 동일한 금액을 나누는 제도가 아니라 종전자산과 종후자산의 가치, 분담금과 청산금을 통하여 권리관계를 조정하는 제도입니다. 조합이 변경안을 마련하려면 1+1 조합원과 기본 1주택 조합원 각각의 종전자산가액, 비례율 상승 효과, 조합원별 실질 수익률을 비교하여 특정 집단에 부담이 편중되지 않는지 검증하여야 하며, 해당 변경안이 도시정비법 제76조 제1항 제1호가 요구하는 균형배분 및 합리적 이용의 원칙에 부합하여야 합니다."</p></blockquote>
