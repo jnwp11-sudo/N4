@@ -159,6 +159,111 @@
     color:var(--gold);font-size:20px;font-weight:700;
   }
 
+  /* Trust-formation timeline (Issue 1) */
+  .timeline{margin:20px 0 4px;position:relative;padding-left:26px;}
+  .timeline::before{
+    content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg, var(--gold) 0%, var(--navy) 100%);
+  }
+  .t-item{position:relative;padding-bottom:15px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";position:absolute;left:-26px;top:3px;width:14px;height:14px;
+    border-radius:50%;background:var(--panel);border:3px solid var(--navy);
+  }
+  .t-item.t-final::before{border-color:var(--gold);background:var(--gold);}
+  .t-date{font-family:'Noto Serif KR',serif;font-weight:700;font-size:13px;color:var(--navy);margin-bottom:3px;}
+  .t-label{font-size:14.5px;color:var(--ink);}
+  .t-label strong{color:var(--navy-deep);}
+  .t-sub{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+  .t-sub strong{color:var(--navy-deep);font-weight:700;}
+
+  /* Supply-order comparison (Issue 4) */
+  .flow-block{margin:18px 0 26px;}
+  .flow-caption{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:14px;
+    margin-bottom:12px;
+  }
+  .flow-caption .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .flow-caption.ok .dot{background:var(--navy);}
+  .flow-caption.ok{color:var(--navy-deep);}
+  .flow-caption.bad .dot{background:var(--danger);}
+  .flow-caption.bad{color:var(--danger);}
+
+  .flow-row{display:flex;align-items:stretch;flex-wrap:wrap;gap:0;}
+  .flow-step{
+    flex:1;min-width:104px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;
+    padding:12px 10px;text-align:center;font-size:13px;color:var(--ink);
+    display:flex;flex-direction:column;justify-content:center;gap:4px;
+  }
+  .flow-step .n{
+    font-family:'Noto Serif KR',serif;font-weight:900;font-size:11px;color:var(--ink-soft);
+  }
+  .flow-step.plus1{
+    background:#eef3f9;border-color:var(--navy);font-weight:700;color:var(--navy-deep);
+  }
+  .flow-row.bad .flow-step.plus1{
+    background:#fdf1ee;border-color:var(--danger);color:var(--danger);
+  }
+  .flow-arrow{
+    flex:0 0 26px;display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);font-size:16px;
+  }
+  .flow-note{
+    margin-top:10px;font-size:12.5px;color:var(--ink-soft);
+    background:var(--gold-soft);border-radius:6px;padding:9px 12px;
+  }
+  .flow-note strong{color:#5c4526;}
+
+  @media (max-width:420px){
+    .flow-row{flex-direction:column;}
+    .flow-arrow{transform:rotate(90deg);flex-basis:20px;}
+  }
+
+  /* Stage → legal action flow (Issue 5) */
+  .stage-flow{display:flex;flex-direction:column;margin:16px 0 4px;}
+  .stage-header{display:flex;gap:10px;margin-bottom:5px;padding:0 2px;}
+  .stage-header .h-label{
+    flex:0 0 128px;text-align:center;
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:11px;
+    color:var(--navy-deep);letter-spacing:0.02em;
+  }
+  .stage-header .h-action{
+    flex:1;text-align:center;
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:11px;
+    color:var(--navy-deep);letter-spacing:0.02em;
+  }
+  .stage-step{display:flex;align-items:stretch;gap:10px;}
+  .stage-step .stage-label{
+    flex:0 0 128px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:var(--navy);color:#fff;
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:12px;line-height:1.25;
+    border-radius:6px;padding:5px 6px;
+  }
+  .stage-step .stage-action{
+    flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:6px;
+    padding:5px 10px;font-size:12.5px;color:var(--ink);line-height:1.3;
+  }
+  /* Arrow sits only under the 진행 단계 column — that's the axis that's actually
+     progressing; echoing it under the action column too just adds visual noise. */
+  .stage-arrow-row{display:flex;gap:10px;margin:1px 0;}
+  .stage-arrow-row .a-label{
+    flex:0 0 128px;display:flex;justify-content:center;align-items:center;
+    color:var(--gold);font-size:19px;font-weight:900;line-height:1;
+  }
+  .stage-arrow-row .a-action{flex:1;}
+
+  @media (max-width:380px){
+    .stage-step{align-items:stretch;}
+    .stage-step .stage-label{flex-basis:104px;font-size:11px;padding:5px 5px;}
+    .stage-header .h-label{flex-basis:104px;}
+    .stage-arrow-row .a-label{flex-basis:104px;font-size:17px;}
+  }
+
   /* Conclusion box for part 1 */
   .conclusion-box{
     background:var(--navy-deep);
@@ -412,7 +517,44 @@
   <div class="issue">
     <h3>1. 신뢰보호원칙 — 이미 확정된 권리입니다</h3>
     <p>이번 사안의 출발점입니다. +1 분양가가 아직 '기대'에 불과하다면 조합은 언제든 바꿀 수 있지만, 이미 '권리'로 확정됐다면 이야기가 달라집니다. 나머지 쟁점도 이 전제 위에 있습니다.</p>
-    <p>+1 주택의 조합원분양가는 정해진 절차를 밟아 확정된 결론입니다. 2021년 분양신청 안내책자와 2022년 7월 추정분담금 통지에 조합원분양가 적용이 명시됐고, 같은 해 8월 총회 의결과 12월 인가로 확정됐습니다. 2023년 5월 조합장이 이를 재확인했고, 2026년 5월에는 일부 조합원이 이를 신뢰해 실제로 +1 주택 계약을 체결하고 계약금까지 지급한 사실도 확인됩니다. 즉 이 신뢰는 2021년부터 최근까지 5년 가까이 끊이지 않고 이어져 왔습니다.<span class="fn-ref">1</span></p>
+    <p>+1 주택의 조합원분양가는 정해진 절차를 밟아 확정된 결론입니다.</p>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2021년 11월</div>
+        <div class="t-label"><strong>분양신청 안내책자</strong> 배포</div>
+        <div class="t-sub">+1 주택, 조합원분양가 적용 명시</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2022년 7월</div>
+        <div class="t-label"><strong>추정분담금 통지</strong></div>
+        <div class="t-sub">+1 조합원에게도 조합원분양가 기준으로 통지</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2022년 8월</div>
+        <div class="t-label"><strong>총회 의결</strong> — 관리처분계획(안)</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2022년 12월</div>
+        <div class="t-label"><strong>관리처분계획 인가</strong></div>
+        <div class="t-sub">+1 조합원분양가, <strong style="text-decoration:underline;">구속적 행정계획으로 확정</strong></div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2023년 5월</div>
+        <div class="t-label">조합장, <strong>"+1 분양가격은 조합원분양가"</strong> 공식 재확인</div>
+        <div class="t-sub">[전체 조합원 채팅방]</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026년 5월</div>
+        <div class="t-label">+1 조합원들, <strong>계약 체결·계약금 지급</strong> 이어짐</div>
+        <div class="t-sub">확정된 가격을 신뢰해 실제 이행까지 진행 (자문서 확인 사례: 2026.5.10.경)</div>
+      </div>
+      <div class="t-item t-final">
+        <div class="t-date">2026년 5월</div>
+        <div class="t-label">조합장, <strong>"조합원분양가 기준"</strong> 재차 확인</div>
+        <div class="t-sub">[전체 조합원 채팅방, 2026.6.14. 조합장 발언 중 언급]</div>
+      </div>
+    </div>
+    <p class="t-sub" style="margin-top:16px;">→ 2021년부터 2026년까지 5년 가까이, 반복적으로 확인된 신뢰입니다.<span class="fn-ref">1</span></p>
     <blockquote><p>"조합원이 법 제76조 제1항 제7호 라목에 따라 주택을 추가로 공급받는 경우 분양가는 조합원분양가를 적용한다."<br><span style="font-size:12px;opacity:0.7;">— 인가받은 관리처분계획 명시 문구</span></p></blockquote>
     <p>법원은 관리처분계획을 조합 내부 방침이 아니라, 인가와 동시에 조합원 개개인에게 구체적 권리를 부여하는 독립된 행정처분(구속적 행정계획)으로 봅니다.<span class="fn-ref">2</span> 조합원은 이를 믿고 이주·계약·대출 같은 되돌리기 어려운 결정을 내리게 되며, 법원은 이 신뢰를 신뢰보호원칙으로 보호합니다.</p>
     <p>총회는 새 결의로 기존 계획을 바꿀 재량이 있지만 무제한은 아닙니다. 법원은 ① 절차·의결정족수 준수 ② 법령·정관 부합 ③ 기존 계획을 신뢰한 조합원의 이익보다 변경 이익이 우월할 것, 이 세 기준을 제시합니다.<span class="fn-ref">3</span></p>
@@ -461,6 +603,29 @@
     <h3>4. 일반분양 후 남는 물량을 +1에 주는 방식도, 위법합니다</h3>
     <p>가격이 아니라 공급 조건을 바꾸는 방식도 거론되고 있습니다. +1 조합원에게 공급하는 순서를 일반분양 뒤로 미루거나, 층수(동·호수) 배정을 저층으로 낮추는 방식입니다.</p>
     <p>도시정비법 제79조는 사업시행자가 인가된 관리처분계획에 따라 공급대상자, 즉 조합원에게 먼저 건축물을 공급하고 남는 물량만 그 외의 일반 수요자에게 공급하도록 순서를 정하고 있습니다.<span class="fn-ref">1</span> 현재 인가된 관리처분계획상 +1 조합원의 추가 1주택도 조합원의 지위에서 분양받는 것이므로, 조합은 이 공급순서를 그대로 따라야 합니다. "기본 1주택만 조합원 공급 → 일반분양 → 일반분양 후 남는 물량만 +1 주택으로 공급"하는 방식은 +1 신청자를 사실상 일반분양 잔여물량 수령자로 전환하는 것입니다.</p>
+
+    <div class="flow-block">
+      <div class="flow-caption ok"><span class="dot"></span>인가된 공급순서 (현재)</div>
+      <div class="flow-row">
+        <div class="flow-step"><span class="n">1</span>기본 1주택<br>조합원공급</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step plus1"><span class="n">2</span>+1 추가주택<br>조합원공급</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span class="n">3</span>잔여분<br>일반분양</div>
+      </div>
+    </div>
+    <div class="flow-block">
+      <div class="flow-caption bad"><span class="dot"></span>검토 중인 변경안</div>
+      <div class="flow-row bad">
+        <div class="flow-step"><span class="n">1</span>기본 1주택<br>조합원공급</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span class="n">2</span>일반분양</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step plus1"><span class="n">3</span>잔여 저층분만<br>+1 공급</div>
+      </div>
+    </div>
+    <p class="flow-note"><strong>공급순서가 두 번째에서 가장 뒤로 밀리면서</strong>, +1 조합원은 사실상 "일반분양 후 남는 물량을 받는 자"로 전환됩니다.</p>
+
     <p>층수 재배정 방식도 위법하기는 마찬가지입니다. 2022년 관리처분계획의 동·호수 배치도에는 조합원분양은 로열층을 우선으로 하고 일반분양은 저층부 중심으로 한다는 내용이 이미 명시돼 있습니다.<span class="fn-ref">2</span> 로열층 우선배정도 가격과 마찬가지로 이미 총회 의결·인가를 거쳐 확정된 구체적 권리이며, 이를 지금 와서 저층으로 바꾸는 것은 가격을 조합원분양가에서 일반분양가로 바꾸는 것과 본질적으로 같은 구조입니다. 앞서 본 신뢰보호원칙 판단기준<span class="fn-ref">3</span>은 대상이 가격이든 층수든 동일하게 적용되며, 조합측이 참고할 만한 판례<span class="fn-ref">4</span>도 처음부터 그렇게 관리처분계획을 짠 사건이지 "로열층으로 확정해줬다가 나중에 저층으로 바꾼" 사건이 아니어서, 이 사건에 그대로 원용하기는 어렵다고 태평양 자문서는 분석하고 있습니다.</p>
     <p class="concl">공급 순서를 바꾸든 층수를 바꾸든, 이미 확정된 조합원의 권리 내용을 사후에 조합원에게 불리한 방향으로 바꾼다는 점은 같습니다. 순서를 뒤로 미루는 것은 도시정비법이 정한 조합원 우선공급 구조에 반하고, 층수를 낮추는 것은 이미 확정·공표된 조건을 사후에 뒤집는다는 점에서 신뢰보호원칙에 반합니다. 어느 쪽이든 관리처분계획 변경사항이라 별도의 총회 의결·인가가 다시 필요하고, 소송 리스크도 가격변경과 동일하게 따라옵니다.</p>
     <div class="fn-list"><ol>
@@ -475,15 +640,36 @@
     <h3>5. 변경을 강행하는 순간, 사업 지연은 정해진 수순이 됩니다</h3>
     <p>앞의 네 쟁점이 '법적으로 누가 옳은가'였다면, 이 부분은 그 판단이 실제 일정과 비용에 어떤 영향을 주는지의 문제입니다. 소송의 최종 승패와 별개로, 분쟁이 시작되는 순간부터 일정에는 이미 영향이 갑니다.</p>
     <p>관리처분계획 변경이 실제로 추진되면 진행 단계에 따라 다음과 같이 취할 수 있는 법적 조치가 달라집니다.<span class="fn-ref">1</span></p>
-    <table class="compare">
-      <colgroup><col style="width:34%"><col style="width:66%"></colgroup>
-      <tr><th>진행 단계</th><th>가능한 법적 조치</th></tr>
-      <tr><td class="label">총회 상정 전</td><td>총회 개최금지 가처분</td></tr>
-      <tr><td class="label">총회 의결 후 ~ 인가 전</td><td>총회결의 효력정지 가처분<br>총회결의 무효확인소송</td></tr>
-      <tr><td class="label">재분양 절차 진행 단계</td><td>재분양절차 진행중지 가처분</td></tr>
-      <tr><td class="label">변경인가 이후</td><td>관리처분계획 취소·무효확인 본안소송</td></tr>
-      <tr><td class="label">본안소송 진행 중(공통)</td><td>집행정지 신청 병행</td></tr>
-    </table>
+    <div class="stage-flow">
+      <div class="stage-header">
+        <div class="h-label">진행 단계</div>
+        <div class="h-action">가능한 법적 조치</div>
+      </div>
+      <div class="stage-step">
+        <div class="stage-label">총회 상정 전</div>
+        <div class="stage-action">총회 개최금지 가처분</div>
+      </div>
+      <div class="stage-arrow-row"><div class="a-label">↓</div><div class="a-action"></div></div>
+      <div class="stage-step">
+        <div class="stage-label">총회 의결 후<br>~ 인가 전</div>
+        <div class="stage-action">총회결의 효력정지 가처분<br>총회결의 무효확인소송</div>
+      </div>
+      <div class="stage-arrow-row"><div class="a-label">↓</div><div class="a-action"></div></div>
+      <div class="stage-step">
+        <div class="stage-label">재분양 절차<br>진행 단계</div>
+        <div class="stage-action">재분양절차 진행중지 가처분</div>
+      </div>
+      <div class="stage-arrow-row"><div class="a-label">↓</div><div class="a-action"></div></div>
+      <div class="stage-step">
+        <div class="stage-label">변경인가 이후</div>
+        <div class="stage-action">관리처분계획 취소·무효확인<br>본안소송</div>
+      </div>
+      <div class="stage-arrow-row"><div class="a-label">↓</div><div class="a-action"></div></div>
+      <div class="stage-step">
+        <div class="stage-label">본안소송 진행<br>중(공통)</div>
+        <div class="stage-action">집행정지 신청 병행</div>
+      </div>
+    </div>
     <p>실무적으로 가처분이 제기되면 행정청은 그 결론이 나올 때까지 관리처분계획 변경인가를 보류하는 경우가 많습니다. 가처분이 인용되면 재분양·변경인가·일반분양·착공으로 이어지는 일정이 그대로 늦춰지고, 설령 가처분이 기각되어 사업이 먼저 진행되더라도 이후 본안소송에서 이 변경이 위법하다는 판결이 나오면 그 사이 진행된 절차를 다시 되돌려야 할 수 있습니다.</p>
     <p>태평양 자문서는 현재까지 확인된 사실관계를 놓고 볼 때 +1 조합원 측(원안 유지)이 소송을 제기할 경우 승소 가능성이 높다고 보는데, 이는 뒤집어 보면 변경을 강행하는 순간부터 사업 지연 역시 상당히 높은 확률로 함께 따라온다는 뜻이기도 합니다.<span class="fn-ref">2</span></p>
     <p class="concl">그리고 그 지연으로 늘어나는 시간과 비용은 특정 조합원이 아니라 조합 전체가 함께 짊어지게 됩니다.</p>
